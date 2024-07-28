@@ -57,7 +57,7 @@ def process_and_send_messages(service, messages):
 
 def main():
     service = initialize_service()
-    user_email = 'sangom2902@gmail.com'
+    user_email = 'smistry@meta.com'
     
     while True:
         past_time_unix, now_unix = get_unix_time_range(1)
@@ -67,7 +67,7 @@ def main():
         if messages:
             process_and_send_messages(service, messages)
         
-        time.sleep(60)
+        time.sleep(3600)
 
 if __name__ == "__main__":
     main()
