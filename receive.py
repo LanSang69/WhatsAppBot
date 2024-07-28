@@ -7,7 +7,7 @@ from message import Message
 from twilio.rest import Client
 
 account_sid = 'AC9d6692f5602687cdb3234d3e6572c3e0'
-auth_token = 'f281a5d3275a2f62013b5f3f1e97d025'
+auth_token = '4bc0009693d0569733a9d9e2cd11dc54'
 client = Client(account_sid, auth_token)
 
 CLIENT_SECRET_FILE = 'client_secret.json'
