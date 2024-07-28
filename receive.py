@@ -3,8 +3,12 @@ import base64
 from email import message_from_bytes
 from datetime import datetime, timedelta
 import time
-from message import Message
 from twilio.rest import Client
+
+# Installations needed:
+# pip install google-api-python-client
+# pip install google-auth google-auth-oauthlib google-auth-httplib2
+# pip install twilio
 
 account_sid = 'AC9d6692f5602687cdb3234d3e6572c3e0'
 auth_token = '4bc0009693d0569733a9d9e2cd11dc54'
