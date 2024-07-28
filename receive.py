@@ -67,7 +67,7 @@ def main():
         if messages:
             process_and_send_messages(service, messages)
         
-        time.sleep(3600)
+        time.sleep(60)
 
 if __name__ == "__main__":
     main()
