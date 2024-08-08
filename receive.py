@@ -1,3 +1,4 @@
+import os
 from Google import Create_Service
 import base64
 from email import message_from_bytes
@@ -10,8 +11,8 @@ from twilio.rest import Client
 # pip install google-auth google-auth-oauthlib google-auth-httplib2
 # pip install twilio
 
-account_sid = 'AC9d6692f5602687cdb3234d3e6572c3e0'
-auth_token = '4bc0009693d0569733a9d9e2cd11dc54'
+account_sid = os.getenv('TWILIO_ACCOUNT_SID')
+auth_token = os.getenv('TWILIO_ACCOUNT_TOKEN')
 client = Client(account_sid, auth_token)
 
 CLIENT_SECRET_FILE = 'client_secret.json'
@@ -37,8 +38,8 @@ def get_unix_time_range(hours):
     past_time_unix = int(time.mktime(past_time.timetuple()))
     return past_time_unix, now_unix
 
-def construct_query(user_email, past_time_unix, now_unix):
-    return f'from:{user_email} after:{past_time_unix} before:{now_unix}'
+def construct_query(past_time_unix, now_unix):
+    return f'after:{past_time_unix} before:{now_unix}'
 
 def fetch_messages(service, user_id, query):
     results = service.users().messages().list(userId=user_id, labelIds=['INBOX'], q=query).execute()
@@ -57,11 +58,10 @@ def process_and_send_messages(service, messages):
 
 def main():
     service = initialize_service()
-    user_email = 'smistry@meta.com'
     
     while True:
         past_time_unix, now_unix = get_unix_time_range(1)
-        query = construct_query(user_email, past_time_unix, now_unix)
+        query = construct_query(past_time_unix, now_unix)
         messages = fetch_messages(service, 'me', query)
         
         if messages:
